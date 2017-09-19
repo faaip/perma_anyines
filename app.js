@@ -20,13 +20,17 @@ function setup() {
 
 	// Color canvas
 	background(0);
+
+	// Increment brain call-back
+	window.setInterval(setBrainIndex,30);
 }
 
 function draw() {
-	brainImg =brain_images_4[getBrainIndex()];
-	xPos =  (width/2)-brain_images_4[getBrainIndex()].width/2;
-	yPos= (height/2)-brain_images_4[getBrainIndex()].height/2;
-image(brainImg,xPos,yPos);
+	brainImg = brain_images_4[brainIndex];
+	xPos = (width / 2) - brain_images_4[brainIndex].width / 2;
+	yPos = (height / 2) - brain_images_4[brainIndex].height / 2;
+	tint(255,30);
+	image(brainImg, xPos, yPos);
 }
 
 function windowResized() {
@@ -36,7 +40,8 @@ function windowResized() {
 
 brainIndex = 0;
 ascending = true;
-function getBrainIndex() {
+increment = 0.1;
+function setBrainIndex() {
 	if (ascending) {
 		brainIndex++;
 	} else {
@@ -46,6 +51,4 @@ function getBrainIndex() {
 	if (brainIndex <= 0 || brainIndex >= brain_images_4.length - 1) {
 		ascending = !ascending;
 	}
-	console.log(brainIndex)
-	return brainIndex;
 }
