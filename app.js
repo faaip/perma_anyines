@@ -1,54 +1,68 @@
-brain_images_1 = []; // Images for brain
-brain_images_2 = []; // Images for brain
-brain_images_3 = []; // Images for brain
-brain_images_4 = []; // Images for brain
-brain_images_5 = []; // Images for brain
+// Buffers for drawing two canvases
+let leftBuffer;
+let rightBuffer;
+
+// Font
+let hackFont;
+let hackFontBold;
+let hackFontItalic;
+
+let canvasSeparator; // Line that separates the two canvases
+let rightBufferWidth;
+let leftBufferWidth;
 
 function preload() {
-	// Populate brain image array
-	for (let i = 0; i < 239; i++) {
-		brain_images_4.push(loadImage('assets/Serie4/brain_' + i + '.jpg'));
-	}
+	hackFont = loadFont('assets/fonts/Hack-Regular.ttf');
+	hackFontBold = loadFont('assets/fonts/Hack-Bold.ttf');
+	hackFontItalic = loadFont('assets/fonts/Hack-Italic.ttf');
 }
-
 function setup() {
-	// Create the new canvas
 	createCanvas(window.innerWidth, window.innerHeight);
 
-  // Set window title
-	document.title = ' P E R M A ';
-
-	// Color canvas
-	background(0);
-
-	// Increment brain call-back
-	window.setInterval(setBrainIndex,30);
+  // Create both of your off-screen graphics buffers
+	canvasSeparator = window.innerWidth / 2;
+	rightBufferWidth = leftBufferWidth = canvasSeparator;
+	leftBuffer = createGraphics(canvasSeparator, window.innerHeight);
+	rightBuffer = createGraphics(canvasSeparator, window.innerHeight);
+	
+	leftBuffer.textFont(hackFont);
+	rightBuffer.textFont(hackFont);
 }
 
 function draw() {
-	brainImg = brain_images_4[brainIndex];
-	xPos = (width / 2) - brain_images_4[brainIndex].width / 2;
-	yPos = (height / 2) - brain_images_4[brainIndex].height / 2;
-	tint(255,30);
-	image(brainImg, xPos, yPos);
+  // Draw on your buffers however you like
+	drawLeftBuffer();
+	drawRightBuffer();
+
+  // Paint the off-screen buffers onto the main canvas
+	image(leftBuffer, 0, 0);
+	image(rightBuffer, canvasSeparator, 0);
+}
+
+function drawLeftBuffer() {
+	leftBuffer.background(0, 0, 0);
+	leftBuffer.fill(255, 255, 255);
+	leftBuffer.textSize(14);
+	leftBuffer.text('Width: ' + leftBufferWidth, 50, 50);
+}
+
+function drawRightBuffer() {
+	rightBuffer.background(255, 100, 255);
+	rightBuffer.fill(0, 0, 0);
+	rightBuffer.textSize(14);
+	rightBuffer.text('Width: ' + rightBufferWidth, 50, 50);
+	rightBuffer.ellipse(rightBufferWidth, window.innerHeight, 50, 50);
 }
 
 function windowResized() {
 	// Call back for window resizing
 	resizeCanvas(windowWidth, windowHeight);
-}
 
-brainIndex = 0;
-ascending = true;
-increment = 0.1;
-function setBrainIndex() {
-	if (ascending) {
-		brainIndex++;
-	} else {
-		brainIndex--;
-	}
+	// Resize buffers
+	canvasSeparator = window.innerWidth / 2;
+	rightBufferWidth = leftBufferWidth = canvasSeparator;
 
-	if (brainIndex <= 0 || brainIndex >= brain_images_4.length - 1) {
-		ascending = !ascending;
-	}
+	// leftBuffer = createGraphics(canvasSeparator, window.innerHeight);
+	// rightBuffer = createGraphics(canvasSeparator, window.innerHeight);
+	leftBuffer.resize(canvasSeparator, window.innerHeight);
 }
