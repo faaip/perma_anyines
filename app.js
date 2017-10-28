@@ -4,65 +4,49 @@ let rightBuffer;
 
 // Font
 let hackFont;
-let hackFontBold;
-let hackFontItalic;
 
 let canvasSeparator; // Line that separates the two canvases
 let rightBufferWidth;
 let leftBufferWidth;
 
+let bufLeft;
+let bufRightU;
+let bufRightL;
+
 function preload() {
 	hackFont = loadFont('assets/fonts/Hack-Regular.ttf');
 	hackFontBold = loadFont('assets/fonts/Hack-Bold.ttf');
 	hackFontItalic = loadFont('assets/fonts/Hack-Italic.ttf');
+
 }
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
 
-  // Create both of your off-screen graphics buffers
-	canvasSeparator = window.innerWidth / 2;
-	rightBufferWidth = leftBufferWidth = canvasSeparator;
-	leftBuffer = createGraphics(canvasSeparator, window.innerHeight);
-	rightBuffer = createGraphics(canvasSeparator, window.innerHeight);
-	
-	leftBuffer.textFont(hackFont);
-	rightBuffer.textFont(hackFont);
+	// Create buffers
+	const halfWidth = window.innerWidth/2;
+	const halfHeight = window.innerHeight/2;
+	bufLeft = CanvasBuffer(0, 0, halfWidth, window.innerHeight, hackFont, '32');
+	bufRightU = CanvasBuffer(halfWidth, 0, halfWidth, window.innerHeight, hackFont, '42');
+	bufRightU = CanvasBuffer(halfWidth, halfHeight, halfWidth, window.innerHeight, hackFont, '42');
 }
 
 function draw() {
-  // Draw on your buffers however you like
-	drawLeftBuffer();
-	drawRightBuffer();
-
-  // Paint the off-screen buffers onto the main canvas
-	image(leftBuffer, 0, 0);
-	image(rightBuffer, canvasSeparator, 0);
-}
-
-function drawLeftBuffer() {
-	leftBuffer.background(0, 0, 0);
-	leftBuffer.fill(255, 255, 255);
-	leftBuffer.textSize(14);
-	leftBuffer.text('Width: ' + leftBufferWidth, 50, 50);
-}
-
-function drawRightBuffer() {
-	rightBuffer.background(255, 100, 255);
-	rightBuffer.fill(0, 0, 0);
-	rightBuffer.textSize(14);
-	rightBuffer.text('Width: ' + rightBufferWidth, 50, 50);
-	rightBuffer.ellipse(rightBufferWidth, window.innerHeight, 50, 50);
+	// background(0);
+	bufLeft.display();
+	bufRightU.display();
+	bufRightL.display();
 }
 
 function windowResized() {
 	// Call back for window resizing
 	resizeCanvas(windowWidth, windowHeight);
-
-	// Resize buffers
-	canvasSeparator = window.innerWidth / 2;
-	rightBufferWidth = leftBufferWidth = canvasSeparator;
-
-	// leftBuffer = createGraphics(canvasSeparator, window.innerHeight);
-	// rightBuffer = createGraphics(canvasSeparator, window.innerHeight);
-	leftBuffer.resize(canvasSeparator, window.innerHeight);
 }
+
+// Function CanvasBuffer(x, y, w, h) {
+//  	this.x = x;
+//  	this.y = y;
+//  	this.w = w;
+//  	this.h = h;
+
+//   const hackFont = loadFont('assets/fonts/Hack-Regular.ttf');
+//  }
