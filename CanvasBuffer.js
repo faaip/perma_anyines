@@ -1,29 +1,33 @@
-function CanvasBuffer(x, y, w, h, font, id) {
-	// setters
+function CanvasBuffer(x, y, w, h) {
+  // Input arguments
 	this.x = x;
 	this.y = y;
 	this.w = w;
 	this.h = h;
-	this.font = font; // Shared font for all buffers
-	textFont(font);
 
-	console.log(x,y,w,h);
+	// setup the rest
+  textFont(font);
 
-	// variables
-	var bgColor = color(0);
-	var textColor = color(0);
-	var fontSize = 14;
+  this.move = function() {
 
-	this.display = function () {
-		// Set background color
+  };
 
-		// Draw graphics
-		// Draw text
-		fill(textColor);
-		textSize(fontSize);
-		text(mouseX, x+15,y+15);
-		ellipse(x,y,w,h);
+	this.resize = function(x,y,w,h){
+		// Input arguments
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+	}
 
-		// and finally reset matrix
-	};
-};
+  this.display = function() {
+    translate(this.x, this.y);
+    fill(255);
+    text(str(mouseX-this.x) + "\n" + str(mouseY-this.y), 15, 15);
+    resetMatrix();
+  };
+
+  this.isMouseInside = function() {
+    return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
+  }
+}

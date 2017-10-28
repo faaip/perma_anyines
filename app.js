@@ -1,52 +1,48 @@
-// Buffers for drawing two canvases
+// Buffers
 let leftBuffer;
-let rightBuffer;
+let rightBufferU;
+let rightBufferL;
 
-// Font
-let hackFont;
-
-let canvasSeparator; // Line that separates the two canvases
-let rightBufferWidth;
-let leftBufferWidth;
-
-let bufLeft;
-let bufRightU;
-let bufRightL;
+// font
+let font;
 
 function preload() {
-	hackFont = loadFont('assets/fonts/Hack-Regular.ttf');
-	hackFontBold = loadFont('assets/fonts/Hack-Bold.ttf');
-	hackFontItalic = loadFont('assets/fonts/Hack-Italic.ttf');
-
+  font = loadFont('assets/fonts/Hack-Regular.ttf');
 }
-function setup() {
-	createCanvas(window.innerWidth, window.innerHeight);
 
-	// Create buffers
-	const halfWidth = window.innerWidth/2;
-	const halfHeight = window.innerHeight/2;
-	bufLeft = CanvasBuffer(0, 0, halfWidth, window.innerHeight, hackFont, '32');
-	bufRightU = CanvasBuffer(halfWidth, 0, halfWidth, window.innerHeight, hackFont, '42');
-	bufRightU = CanvasBuffer(halfWidth, halfHeight, halfWidth, window.innerHeight, hackFont, '42');
+function setup() {
+  // Canvas
+  createCanvas(window.innerWidth, window.innerHeight);
+
+  // Buffers
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  leftBuffer = new CanvasBuffer(0, 0, w / 2, h);
+  rightBufferU = new CanvasBuffer(w / 2, 0, w / 2, h / 2);
+  rightBufferL = new CanvasBuffer(w / 2, h / 2, w / 2, h / 2);
 }
 
 function draw() {
-	// background(0);
-	bufLeft.display();
-	bufRightU.display();
-	bufRightL.display();
+  background(0);
+  leftBuffer.move();
+  leftBuffer.display();
+
+  rightBufferU.move();
+  rightBufferU.display();
+
+  rightBufferL.move();
+  rightBufferL.display();
 }
 
 function windowResized() {
-	// Call back for window resizing
-	resizeCanvas(windowWidth, windowHeight);
+	const w = window.innerWidth;
+	const h = window.innerHeight;
+
+	resizeCanvas(w,h);
+
+	// Buffers
+	leftBuffer.resize(0, 0, w / 2, h);
+	rightBufferU.resize(w / 2, 0, w / 2, h / 2);
+	rightBufferL.resize(w / 2, h / 2, w / 2, h / 2);
 }
-
-// Function CanvasBuffer(x, y, w, h) {
-//  	this.x = x;
-//  	this.y = y;
-//  	this.w = w;
-//  	this.h = h;
-
-//   const hackFont = loadFont('assets/fonts/Hack-Regular.ttf');
-//  }
