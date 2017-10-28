@@ -20,10 +20,6 @@ function CanvasBuffer(x, y, w, h) {
     this.h = h;
   }
 
-
-
-
-
   this.isMouseInside = function() {
     return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
   }
@@ -35,7 +31,11 @@ function CanvasBuffer(x, y, w, h) {
 
   this.drawText = function() {
     translate(this.x, this.y);
-    fill(255);
+		if(this.isMouseInside()){
+			fill(255);
+		}else{
+			fill(127);
+		}
     text(str(mouseX - this.x) + "\n" + str(mouseY - this.y), 15, 15);
     resetMatrix();
   }
