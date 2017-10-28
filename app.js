@@ -20,13 +20,16 @@ function setup() {
   const w = window.innerWidth;
   const h = window.innerHeight;
 
+	// Load data
+	loadImages();
+
 	// Instantiate drawing buffers
   leftBuffer = new CanvasBuffer(0, 0, w / 2, h);
   rightBufferU = new CanvasBuffer(w / 2, 0, w / 2, h / 2);
   rightBufferL = new CanvasBuffer(w / 2, h / 2, w / 2, h / 2);
 
-	// Load data
-	loadImages();
+	// Assign inital photoseries to canvasbuffers
+	leftBuffer.setImages(data[0]);
 }
 
 function draw() {
@@ -54,5 +57,5 @@ function windowResized() {
 }
 
 function loadImages(){
-	data.push(new PhotoSeries('assets/images/Serie2'));
+	data.push(new PhotoSeries('assets/images/Serie2/'));
 }

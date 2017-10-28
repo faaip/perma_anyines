@@ -12,6 +12,13 @@ function CanvasBuffer(x, y, w, h) {
 
   };
 
+	this.setImages = function(photoSeries){
+		console.log('wee');
+		console.log(photoSeries.isLoadingDone);
+		this.data = photoSeries;
+		console.log(this.data);
+	};
+
   this.resize = function(x, y, w, h) {
     // Input arguments
     this.x = x;
@@ -25,9 +32,14 @@ function CanvasBuffer(x, y, w, h) {
   }
 
   this.display = function() {
+		this.drawImage();
     this.drawText();
     this.drawMarkers();
+
   };
+
+	this.drawImage = function(){
+	}
 
   this.drawText = function() {
     translate(this.x, this.y);
