@@ -13,6 +13,7 @@ function preload() {
 function setup() {
   // Canvas
   createCanvas(window.innerWidth, window.innerHeight);
+  background(0);
 
   // Buffers
   const w = window.innerWidth;
@@ -28,10 +29,13 @@ function setup() {
 
   // Assign inital photoseries to canvasbuffers
   leftBuffer.setImages(data[0]);
+  rightBufferU.setImages(data[1]);
+  rightBufferL.setImages(data[2]);
+
 }
 
 function draw() {
-  background(0);
+  // background(0);
   leftBuffer.move();
   leftBuffer.display();
 
@@ -55,5 +59,7 @@ function windowResized() {
 }
 
 function loadImages() {
-  data.push(new PhotoSeries('assets/images/Serie2/', 30));
+  data.push(new PhotoSeries('assets/images/Serie2/', 29));
+  data.push(new PhotoSeries('assets/images/Serie3/', 29));
+  data.push(new PhotoSeries('assets/images/Serie4/', 229));
 }

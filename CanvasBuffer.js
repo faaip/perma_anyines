@@ -33,6 +33,9 @@ function CanvasBuffer(x, y, w, h) {
   }
 
   this.display = function() {
+    fill(0);
+    rect(x, y, w, h);
+
     this.drawImage();
     this.drawText();
     this.drawMarkers();
@@ -44,8 +47,7 @@ function CanvasBuffer(x, y, w, h) {
     // Check if data has been set
     if (this.data != null) {
       if (this.data.isLoaded()) {
-        opacity = map(mouseY, 0, w, 0, 255);
-        img = this.data.getImage(map(mouseY, 0, this.h, 0, 1));
+        img = this.data.getImage(this.getNormalisedMouse()[1]);
         image(img, -img.width / 4, -img.height / 4, img.width / 2, img.height / 2);
       } else {
         ellipse(20, 20, 30, 30);
@@ -62,11 +64,20 @@ function CanvasBuffer(x, y, w, h) {
     } else {
       fill(127);
     }
-    text(str(mouseX - this.x) + "\n" + str(mouseY - this.y), 15, 15); // top coordinates
-    if(this.data != null){
-    text(this.data.path,15,h-15);
-  }
+    text(str(mouseX - this.x) + "\n" + str(mouseY - this.y) + "\n" +
+      str(this.getNormalisedMouse()[0] + "\n" +
+        str(this.getNormalisedMouse()[1])), 15, 15); // top coordinates
+
+    if (this.data != null) {
+      text(this.data.getDataString(), 15, h - 15);
+    }
     resetMatrix();
+  }
+
+  this.getNormalisedMouse = function() {
+    let nMouseX = constrain(norm(mouseX, 0, this.w), 0.0, 1.0);
+    let nMouseY = constrain(norm(mouseY, 0, this.h), 0.0, 1.0);
+    return [nMouseX, nMouseY];
   }
 
   this.drawMarkers = function() {
@@ -85,6 +96,5 @@ function CanvasBuffer(x, y, w, h) {
 
       resetMatrix();
     }
-
   }
 }
