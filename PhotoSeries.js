@@ -5,27 +5,29 @@ function PhotoSeries(string, imgCount){
 	this.images = [];
 	this.bLoadingDone = false;
 
-	this.setLoadingDone = function(){
-		console.log('Loaded!');
-	this.bLoadingDone = true;
+	this.setLoadingDone = function () {
+		console.log(this.path, ' loaded!');
+		this.bLoadingDone = true;
 	};
 
-	this.isLoaded = function(){
+	this.isLoaded = function () {
 		return this.bLoadingDone;
-	}
+	};
 
-	this.loadImages = function(){
-		console.log("Loading: ", this.path);
-
+	this.loadImages = function () {
 		// Load images to list
-		for(var i = 0; i < this.imgCount; i++){
-		this.images.push(loadImage(this.path + 'brain_' + str(i) + '.jpg'));	
+		for (let i = 0; i < this.imgCount; i++) {
+			this.images[i] = loadImage(this.path + 'brain_' + str(i) + '.jpg');
 		}
-
 		this.setLoadingDone();
-	}
-	 
-	// Final setup of object
- this.loadImages();
+	};
 
-};
+	this.getImage = function(input){
+		// input is a normalised float - returns image based on mapped index
+		idx = int(map(input,0,1,0,this.images.length));
+		return this.images[idx];
+	}
+
+	// Final setup of object
+	this.loadImages();
+}

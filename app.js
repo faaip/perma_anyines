@@ -3,10 +3,8 @@ let leftBuffer;
 let rightBufferU;
 let rightBufferL;
 
-// font
 let font;
-
-var data = []; // photos and video
+const data = []; // Photos and video
 
 function preload() {
   font = loadFont('assets/fonts/Hack-Regular.ttf');
@@ -20,16 +18,16 @@ function setup() {
   const w = window.innerWidth;
   const h = window.innerHeight;
 
-	// Load data
-	loadImages();
+  // Load data
+  loadImages();
 
-	// Instantiate drawing buffers
+  // Instantiate drawing buffers
   leftBuffer = new CanvasBuffer(0, 0, w / 2, h);
   rightBufferU = new CanvasBuffer(w / 2, 0, w / 2, h / 2);
   rightBufferL = new CanvasBuffer(w / 2, h / 2, w / 2, h / 2);
 
-	// Assign inital photoseries to canvasbuffers
-	leftBuffer.setImages(data[0]);
+  // Assign inital photoseries to canvasbuffers
+  leftBuffer.setImages(data[0]);
 }
 
 function draw() {
@@ -45,17 +43,17 @@ function draw() {
 }
 
 function windowResized() {
-	const w = window.innerWidth;
-	const h = window.innerHeight;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
 
-	resizeCanvas(w,h);
+  resizeCanvas(w, h);
 
-	// Buffers
-	leftBuffer.resize(0, 0, w / 2, h);
-	rightBufferU.resize(w / 2, 0, w / 2, h / 2);
-	rightBufferL.resize(w / 2, h / 2, w / 2, h / 2);
+  // Buffers
+  leftBuffer.resize(0, 0, w / 2, h);
+  rightBufferU.resize(w / 2, 0, w / 2, h / 2);
+  rightBufferL.resize(w / 2, h / 2, w / 2, h / 2);
 }
 
-function loadImages(){
-	data.push(new PhotoSeries('assets/images/Serie2/'));
+function loadImages() {
+  data.push(new PhotoSeries('assets/images/Serie2/', 30));
 }
