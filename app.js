@@ -28,9 +28,9 @@ function setup() {
   rightBufferL = new CanvasBuffer(w / 2, h / 2, w / 2, h / 2);
 
   // Assign inital photoseries to canvasbuffers
-  leftBuffer.setImages(data[2]);
-  rightBufferU.setImages(data[1]);
-  rightBufferL.setImages(data[0]);
+  leftBuffer.setImages(data[0]);
+  rightBufferU.setImages(data[3]);
+  rightBufferL.setImages(data[2]);
 }
 
 function draw() {
@@ -61,4 +61,5 @@ function loadImages() {
   data.push(new PhotoSeries('assets/images/Serie2/', 29));
   data.push(new PhotoSeries('assets/images/Serie3/', 29));
   data.push(new PhotoSeries('assets/images/Serie4/', 229));
+  data.push(new Video('assets/movies/newshader_2_1.mov'));
 }

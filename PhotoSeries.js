@@ -20,7 +20,10 @@ function PhotoSeries(string, imgCount) {
     for (let i = 0; i < this.imgCount; i++) {
       this.images[i] = loadImage(this.path + 'brain_' + str(i) + '.jpg');
     }
-    this.setLoadingDone();
+
+		// Set flag for loading done
+		// FIXME: don't set flag until this previous is done.
+			this.setLoadingDone();
   };
 
   this.getImage = function(input) {

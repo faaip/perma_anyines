@@ -51,10 +51,10 @@ function CanvasBuffer(x, y, w, h) {
           this.mouseNorm = this.getNormalisedMouse()[1];
         }
         img = this.data.getImage(this.mouseNorm);
-        image(img, -img.width / 4, -img.height / 4, img.width / 2, img.height / 2);
+        let ratio = this.calculateAspectRatio(img.width, img.height, this.w*0.8,this.h*0.8);
+        image(img, -ratio.width / 2, -ratio.height / 2, ratio.width, ratio.height);
       } else {
         // data isn't loaded
-
       }
     }
 
@@ -101,4 +101,9 @@ function CanvasBuffer(x, y, w, h) {
       resetMatrix();
     }
   }
+
+  this.calculateAspectRatio = function(srcWidth, srcHeight, maxWidth, maxHeight) {
+      var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+      return {width: srcWidth*ratio, height: srcHeight*ratio};
+   }
 }
