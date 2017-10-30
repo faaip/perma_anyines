@@ -8,6 +8,7 @@ function CanvasBuffer(x, y, w, h) {
 
   // setup the rest
   textFont(font);
+  this.mouseNorm = 0.0;
 
   this.move = function() {
 
@@ -18,7 +19,7 @@ function CanvasBuffer(x, y, w, h) {
   };
 
   this.resize = function(x, y, w, h) {
-    // Input arguments
+    // resizes canvas buffer
     this.x = x;
     this.y = y;
     this.w = w;
@@ -46,13 +47,14 @@ function CanvasBuffer(x, y, w, h) {
     if (this.data != null) {
       if (this.data.isLoaded()) {
         if (this.isMouseInside()) {
-          img = this.data.getImage(this.getNormalisedMouse()[1]);
-        } else {
-          img = this.data.getImage(0);
+          // Update mouseNorm which indexes data
+          this.mouseNorm = this.getNormalisedMouse()[1];
         }
+        img = this.data.getImage(this.mouseNorm);
         image(img, -img.width / 4, -img.height / 4, img.width / 2, img.height / 2);
       } else {
-        ellipse(20, 20, 30, 30);
+        // data isn't loaded
+
       }
     }
 

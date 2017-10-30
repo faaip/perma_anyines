@@ -31,7 +31,6 @@ function setup() {
   leftBuffer.setImages(data[2]);
   rightBufferU.setImages(data[1]);
   rightBufferL.setImages(data[0]);
-
 }
 
 function draw() {
