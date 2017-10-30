@@ -4,7 +4,7 @@ function PhotoSeries(string, imgCount) {
   this.imgCount = imgCount;
   this.images = [];
   this.bLoadingDone = false;
-	this.currentIdx = 0
+  this.currentIdx = 0
 
   this.setLoadingDone = function() {
     console.log(this.path, ' loaded!');
@@ -26,14 +26,14 @@ function PhotoSeries(string, imgCount) {
   this.getImage = function(input) {
     // input is a normalised float - returns image based on mapped index
     idx = int(map(input, 0, 1, 0, this.images.length));
-		idx = ceil(idx,0,this.images.length);
-		this.currentIdx = idx;
+    idx = ceil(idx, 0, this.images.length);
+    this.currentIdx = idx;
     return this.images[idx];
   }
 
-	this.getDataString = function(){
-		return this.path + this.currentIdx + '.jpg'
-	}
+  this.getDataString = function() {
+    return this.path + this.currentIdx + '.jpg'
+  }
 
   // Final setup of object
   this.loadImages();

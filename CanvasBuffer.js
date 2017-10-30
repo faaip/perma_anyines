@@ -14,10 +14,7 @@ function CanvasBuffer(x, y, w, h) {
   };
 
   this.setImages = function(photoSeries) {
-    console.log('wee');
-    console.log(photoSeries.isLoadingDone);
     this.data = photoSeries;
-    console.log(this.data);
   };
 
   this.resize = function(x, y, w, h) {
@@ -29,7 +26,8 @@ function CanvasBuffer(x, y, w, h) {
   }
 
   this.isMouseInside = function() {
-    return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
+    return mouseX > this.x && mouseX < this.x + this.w &&
+      mouseY > this.y && mouseY < this.y + this.h;
   }
 
   this.display = function() {
@@ -47,7 +45,11 @@ function CanvasBuffer(x, y, w, h) {
     // Check if data has been set
     if (this.data != null) {
       if (this.data.isLoaded()) {
-        img = this.data.getImage(this.getNormalisedMouse()[1]);
+        if (this.isMouseInside()) {
+          img = this.data.getImage(this.getNormalisedMouse()[1]);
+        } else {
+          img = this.data.getImage(0);
+        }
         image(img, -img.width / 4, -img.height / 4, img.width / 2, img.height / 2);
       } else {
         ellipse(20, 20, 30, 30);
@@ -75,8 +77,8 @@ function CanvasBuffer(x, y, w, h) {
   }
 
   this.getNormalisedMouse = function() {
-    let nMouseX = constrain(norm(mouseX, 0, this.w), 0.0, 1.0);
-    let nMouseY = constrain(norm(mouseY, 0, this.h), 0.0, 1.0);
+    let nMouseX = constrain(norm(mouseX - this.x, 0, this.w), 0.0, 1.0);
+    let nMouseY = constrain(norm(mouseY - this.y, 0, this.h), 0.0, 1.0);
     return [nMouseX, nMouseY];
   }
 
