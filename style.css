@@ -7,3 +7,9 @@
 }
 
 # hideframe{display: none;}
+
+/* avoid scroll bounce on safari */
+body,
+html {
+  position: fixed;
+}

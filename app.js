@@ -28,9 +28,9 @@ function setup() {
   rightBufferL = new CanvasBuffer(w / 2, h / 2, w / 2, h / 2);
 
   // Assign inital photoseries to canvasbuffers
-  leftBuffer.setImages(data[0]);
+  leftBuffer.setImages(data[2]);
   rightBufferU.setImages(data[1]);
-  rightBufferL.setImages(data[2]);
+  rightBufferL.setImages(data[0]);
 
 }
 
