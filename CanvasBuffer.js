@@ -51,7 +51,8 @@ function CanvasBuffer(x, y, w, h) {
           this.mouseNorm = this.getNormalisedMouse()[1];
         }
         img = this.data.getImage(this.mouseNorm);
-        let ratio = this.calculateAspectRatio(img.width, img.height, this.w*0.8,this.h*0.8);
+
+        let ratio = this.calculateAspectRatio(img.width, img.height, this.w * 0.8, this.h * 0.8);
         image(img, -ratio.width / 2, -ratio.height / 2, ratio.width, ratio.height);
       } else {
         // data isn't loaded
@@ -68,13 +69,24 @@ function CanvasBuffer(x, y, w, h) {
     } else {
       fill(127);
     }
+    textAlign(RIGHT, TOP);
     text(str(mouseX - this.x) + "\n" + str(mouseY - this.y) + "\n" +
       str(this.getNormalisedMouse()[0] + "\n" +
-        str(this.getNormalisedMouse()[1])), 15, 15); // top coordinates
+        str(this.getNormalisedMouse()[1])), this.w-15, 15); // top coordinates
 
     if (this.data != null) {
-      text(this.data.getDataString(), 15, h - 15);
+      textAlign(LEFT, BOTTOM);
+      text(this.data.getDataString(), 15, this.h - 15);
+      textAlign(LEFT, TOP);
     }
+
+    if (this.isMouseInside()) {
+      // RGB in left lower corner
+      textAlign(RIGHT, BOTTOM);
+      text(str(frameRate()), this.w - 15, this.h - 15);
+      textAlign(LEFT, TOP);
+    }
+
     resetMatrix();
   }
 
@@ -103,7 +115,10 @@ function CanvasBuffer(x, y, w, h) {
   }
 
   this.calculateAspectRatio = function(srcWidth, srcHeight, maxWidth, maxHeight) {
-      var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-      return {width: srcWidth*ratio, height: srcHeight*ratio};
-   }
+    var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+    return {
+      width: srcWidth * ratio,
+      height: srcHeight * ratio
+    };
+  }
 }

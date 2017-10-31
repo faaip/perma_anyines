@@ -1,10 +1,13 @@
-function PhotoSeries(string, imgCount) {
+function PhotoSeries(string, imgCount, thickness,locationMin, locationMax) {
   // Set variables
   this.path = string;
   this.imgCount = imgCount;
   this.images = [];
   this.bLoadingDone = false;
   this.currentIdx = 0
+	this.thickness = thickness;
+	this.locationMin = locationMin;
+	this.locationMax = locationMax;
 
   this.setLoadingDone = function() {
     console.log(this.path, ' loaded!');
@@ -21,9 +24,9 @@ function PhotoSeries(string, imgCount) {
       this.images[i] = loadImage(this.path + 'brain_' + str(i) + '.jpg');
     }
 
-		// Set flag for loading done
-		// FIXME: don't set flag until this previous is done.
-			this.setLoadingDone();
+    // Set flag for loading done
+    // FIXME: don't set flag until this previous is done.
+    this.setLoadingDone();
   };
 
   this.getImage = function(input) {
@@ -35,7 +38,13 @@ function PhotoSeries(string, imgCount) {
   }
 
   this.getDataString = function() {
-    return this.path + this.currentIdx + '.jpg'
+		s = "";
+		s += "Im: " + int(this.currentIdx+1) + "/" + this.imgCount + "\n";
+		s += "LittleEndianImplicit\n";
+		s += "Thickness: " + this.thickness + " Location: ";
+		s += map(this.currentIdx, 0, imgCount, this.locationMin, this.locationMax).toFixed(2) + " mm";
+		return s;
+
   }
 
   // Final setup of object
