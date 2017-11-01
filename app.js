@@ -25,6 +25,22 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   background(0);
 
+  // Set window title
+  document.title = " P E R M A ";
+
+  // LOGO_silver
+  // Add logo to top-left corner
+  var logo;
+  logo = document.createElement('img');
+  logo.className = "logo";
+  logo.alt = 'Anyines_logo';
+  logo.style.opacity = '1.0';
+  logo.onclick = function() {
+      window.open('https://anyines.bandcamp.com/album/perma');
+  };
+  logo.src = "assets/images/LOGO_silver.png";
+  document.body.appendChild(logo);
+
   // Buffers
   const w = window.innerWidth;
   const h = window.innerHeight;
