@@ -10,10 +10,6 @@ function CanvasBuffer(x, y, w, h) {
   textFont(font);
   this.mouseNorm = 0.0;
 
-  this.move = function() {
-
-  };
-
   this.setImages = function(photoSeries) {
     this.data = photoSeries;
   };

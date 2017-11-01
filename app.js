@@ -4,9 +4,9 @@ let rightBufferU;
 let rightBufferL;
 
 // idx
-let leftBufferIdx = 0;
-let rightBufferLIdx = 3;
-let rightBufferUIdx = 1;
+let leftBufferIdx = 1;
+let rightBufferLIdx = 0;
+let rightBufferUIdx = 2;
 
 let font;
 const data = []; // Photos and video
@@ -59,20 +59,14 @@ function setup() {
   rightBufferL = new CanvasBuffer(w / 2, h / 2, w / 2, h / 2);
 
   // Assign inital photoseries to canvasbuffers
-  leftBuffer.setImages(data[0]);
-  rightBufferU.setImages(data[3]);
-  rightBufferL.setImages(data[1]);
+  leftBuffer.setImages(data[leftBufferIdx]);
+  rightBufferU.setImages(data[rightBufferUIdx]);
+  rightBufferL.setImages(data[rightBufferLIdx]);
 }
 
 function draw() {
-  // background(0);
-  leftBuffer.move();
   leftBuffer.display();
-
-  rightBufferU.move();
   rightBufferU.display();
-
-  rightBufferL.move();
   rightBufferL.display();
 }
 
