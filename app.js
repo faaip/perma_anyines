@@ -117,6 +117,7 @@ function getNextIndex(currentIdx){
 }
 
 function loadImages() {
+  data.push(new PhotoSeries('assets/images/localiser/', 128, "N/a", null, 0.0));
   data.push(new PhotoSeries('assets/images/a_brain360/', 29, "N/a", null, 0.0));
   data.push(new PhotoSeries('assets/images/Serie2/', 29, "5.00 mm", 7.50, 154.96));
   data.push(new PhotoSeries('assets/images/Serie3/', 29, "5.00 mm", 7.50, 154.96));
