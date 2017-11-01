@@ -44,7 +44,6 @@ function PhotoSeries(string, imgCount, thickness,locationMin, locationMax) {
 		s += "Thickness: " + this.thickness + " Location: ";
 		s += map(this.currentIdx, 0, imgCount, this.locationMin, this.locationMax).toFixed(2) + " mm";
 		return s;
-
   }
 
   // Final setup of object

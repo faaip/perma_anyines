@@ -6,7 +6,8 @@
   z-index: 999;
 }
 
-# hideframe{display: none;}
+#hideframe{display: none;}
+
 
 /* avoid scroll bounce on safari */
 body,
