@@ -3,6 +3,11 @@ let leftBuffer;
 let rightBufferU;
 let rightBufferL;
 
+// idx
+let leftBufferIdx = 0;
+let rightBufferLIdx = 3;
+let rightBufferUIdx = 1;
+
 let font;
 const data = []; // Photos and video
 
@@ -81,6 +86,34 @@ function windowResized() {
   leftBuffer.resize(0, 0, w / 2, h);
   rightBufferU.resize(w / 2, 0, w / 2, h / 2);
   rightBufferL.resize(w / 2, h / 2, w / 2, h / 2);
+}
+
+function mousePressed(){
+  if(leftBuffer.isMouseInside()){
+    leftBufferIdx = getNextIndex(leftBufferIdx);
+    leftBuffer.setImages(data[leftBufferIdx]);
+  }
+
+  if(rightBufferU.isMouseInside()){
+    rightBufferUIdx = getNextIndex(rightBufferUIdx);
+    rightBufferU.setImages(data[rightBufferUIdx]);
+  }
+
+  if(rightBufferL.isMouseInside()){
+    rightBufferLIdx = getNextIndex(rightBufferLIdx);
+    rightBufferL.setImages(data[rightBufferLIdx]);
+  }
+
+}
+
+function getNextIndex(currentIdx){
+  currentIdx++;
+  if(currentIdx >= data.length){
+    currentIdx = 0;
+  }
+
+  console.log(currentIdx);
+  return currentIdx;
 }
 
 function loadImages() {
